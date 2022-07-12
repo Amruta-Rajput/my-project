@@ -1,0 +1,28 @@
+---
+- hosts: all
+  user: amruta
+  become: yes
+  connection: ssh
+  gather_facts: yes
+
+  tasks: 
+    - name: Install git
+      action: yum pkg="git" state="present"
+    - name: Install maven
+      action: yum pkg="maven" state="present"
+    - name: Install docker
+      action: yum pkg="docker" state="present"
+      notify: service start
+  handlers: 
+    - name: service start
+      action: service name="docker" state="started"
+...
+
+
+
+
+
+
+
+
+
